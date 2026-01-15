@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ComputerHouse API Docs</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<nav>
+    <div class="nav-title">ComputerHouse API</div>
+    <div class="nav-sub">REST API Documentation</div>
+</nav>
+
+<div class="container">
+
+    <section class="card">
+        <h1>🖥️ ComputerHouse REST API</h1>
+        <p class="subtitle">
+            Secure backend API for product management with authentication and image upload.
+        </p>
+    </section>
+
+    <section class="card">
+        <h2>📌 Overview</h2>
+        <p>
+            ComputerHouse API is a RESTful backend service built using Spring Boot.
+            It provides secure authentication, product management, and Cloudinary-based image upload.
+        </p>
+    </section>
+
+    <section class="card">
+        <h2>🛠️ Tech Stack</h2>
+        <div class="chips">
+            <span>Spring Boot</span>
+            <span>MongoDB Atlas</span>
+            <span>JWT Security</span>
+            <span>Cloudinary</span>
+            <span>Azure App Service</span>
+        </div>
+    </section>
+
+    <section class="card">
+        <h2>🌐 Base URL</h2>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre>https://computerhouse-fwguerhyakd9dcd4.centralindia-01.azurewebsites.net</pre>
+        </div>
+    </section>
+
+    <section class="card">
+        <h2>🔐 Authentication</h2>
+
+        <h3>Register</h3>
+        <code>POST /auth/register</code>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre>
+{
+  "username": "user1",
+  "password": "password123"
+}
+            </pre>
+        </div>
+
+        <h3>Login</h3>
+        <code>POST /auth/login</code>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre>
+{
+  "token": "JWT_TOKEN"
+}
+            </pre>
+        </div>
+
+        <div class="note">
+            Use the token in header:
+            <br>
+            <code>Authorization: Bearer &lt;JWT_TOKEN&gt;</code>
+        </div>
+    </section>
+
+    <section class="card">
+        <h2>🛒 Product APIs</h2>
+
+        <div class="endpoint">
+            <span class="method get">GET</span>
+            <code>/products</code>
+            <p>Fetch all products (supports pagination).</p>
+        </div>
+
+        <div class="endpoint">
+            <span class="method get">GET</span>
+            <code>/products/{id}</code>
+            <p>Fetch product by ID.</p>
+        </div>
+
+        <div class="endpoint">
+            <span class="method post">POST</span>
+            <code>/products</code>
+            <p>Add product with image (multipart/form-data).</p>
+        </div>
+
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre>
+{
+  "name": "Laptop",
+  "brand": "Dell",
+  "category": "Electronics",
+  "price": 75000,
+  "available": true
+}
+            </pre>
+        </div>
+
+        <div class="endpoint">
+            <span class="method delete">DELETE</span>
+            <code>/products/{id}</code>
+            <p>Delete product by ID.</p>
+        </div>
+    </section>
+
+    <section class="card">
+        <h2>🖼️ Image Handling</h2>
+        <p>
+            Images are uploaded to Cloudinary. The API stores the image public_id and frontend constructs the URL.
+        </p>
+
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre>
+https://res.cloudinary.com/dpzobapgz/image/upload/{imageName}
+            </pre>
+        </div>
+    </section>
+
+    <section class="card">
+        <h2>⚠️ Error Responses</h2>
+        <table>
+            <tr><th>Status</th><th>Description</th></tr>
+            <tr><td>400</td><td>Bad Request / Validation Error</td></tr>
+            <tr><td>401</td><td>Unauthorized</td></tr>
+            <tr><td>403</td><td>Forbidden</td></tr>
+            <tr><td>404</td><td>Not Found</td></tr>
+            <tr><td>500</td><td>Internal Server Error</td></tr>
+        </table>
+    </section>
+
+</div>
+
+<footer>
+    <p>
+        Built by <strong>Digvijay</strong><br>
+        <a href="https://github.com/digvijaykarande" target="_blank">
+            github.com/digvijaykarande
+        </a>
+    </p>
+</footer>
+
+<script>
+    function copyCode(button) {
+        const pre = button.parentElement.querySelector("pre");
+        const text = pre.innerText.trim();
+
+        navigator.clipboard.writeText(text).then(() => {
+            const originalText = button.innerText;
+            button.innerText = "Copied!";
+            button.classList.add("copied");
+
+            setTimeout(() => {
+                button.innerText = originalText;
+                button.classList.remove("copied");
+            }, 1500);
+        });
+    }
+</script>
+
+</body>
+</html>
